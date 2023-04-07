@@ -8,6 +8,7 @@ import { SoftHardCard } from 'src/Components/Cards/SoftHardCard';
 import { KingsaleStatusCard } from 'src/Components/Cards/KingsaleStatusCard';
 import { KingSaleContributeCard } from 'src/Components/Cards/KingsaleContributeCard';
 import { getMaxBuy, getMinBuy, getUserPassActive } from 'src/Contracts/kingPad';
+import { UTCTimePrinter, currentTimeStamp } from 'src/Utils/utcTimePrinter';
 
 export const CoinDetailCards = (props: { data: coinDataProps }) => {
   const { data } = props;
@@ -42,9 +43,9 @@ export const CoinDetailCards = (props: { data: coinDataProps }) => {
   }, [data]);
 
   const getKingStarterStatus = () => {
-    const now = new Date(Date.now()).getTime();
-    const presale_start = new Date(data.presale_start).getTime();
-    const presale_end = new Date(data.presale_end).getTime();
+    const now = currentTimeStamp();
+    const presale_start = UTCTimePrinter(data.presale_start);
+    const presale_end = UTCTimePrinter(data.presale_end);
     let _status = '';
     if (presale_start > now) {
       _status = 'Upcoming';
@@ -59,9 +60,9 @@ export const CoinDetailCards = (props: { data: coinDataProps }) => {
   };
 
   const getTimeStamp = () => {
-    const now = new Date(Date.now()).getTime();
-    const presale_start = new Date(data.presale_start).getTime();
-    const presale_end = new Date(data.presale_end).getTime();
+    const now = currentTimeStamp();
+    const presale_start = UTCTimePrinter(data.presale_start);
+    const presale_end = UTCTimePrinter(data.presale_end);
 
     let _timeStamp = 0;
     if (status === 'Upcoming') {

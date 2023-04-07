@@ -6,6 +6,7 @@ import { KingpadAdBackground, KingpadAdLogo } from 'src/Config/Images';
 import { getAdCardId, getProjectDetailsById } from 'src/Contracts';
 import { useNavigate } from 'react-router-dom';
 import { coinDataProps } from 'src/Constant/interface';
+import { UTCTimePrinter, currentTimeStamp } from 'src/Utils/utcTimePrinter';
 
 export const KingpadAdCard = () => {
   const [adId, setAdId] = useState(-1);
@@ -24,10 +25,10 @@ export const KingpadAdCard = () => {
   };
 
   const getKingStarterStatus = (data: coinDataProps) => {
-    const now = new Date(Date.now()).getTime();
-    const kingpass_start = new Date(data.kingpass_start).getTime();
-    const presale_start = new Date(data.presale_start).getTime();
-    const presale_end = new Date(data.presale_end).getTime();
+    const now = currentTimeStamp();
+    const kingpass_start = UTCTimePrinter(data.kingpass_start);
+    const presale_start = UTCTimePrinter(data.presale_start);
+    const presale_end = UTCTimePrinter(data.presale_end);
     let _status = '';
     if (kingpass_start > now) {
       _status = 'Upcoming';
@@ -89,10 +90,19 @@ const CountDown = (props: { timestamp: number }) => {
   const [timeLeft, setTimeLeft] = useState(getTimeLeft(timestamp));
 
   function getTimeLeft(timestamp: number) {
-    if (timestamp < Date.now()) {
-      timestamp = Date.now();
+    const now = Date.UTC(
+      new Date().getUTCFullYear(),
+      new Date().getUTCMonth(),
+      new Date().getUTCDate(),
+      new Date().getUTCHours(),
+      new Date().getUTCMinutes(),
+      new Date().getUTCSeconds(),
+      new Date().getUTCMilliseconds()
+    );
+    if (timestamp < now) {
+      timestamp = now;
     }
-    const totalSeconds = timestamp === 0 ? timestamp : Math.floor((timestamp - Date.now()) / 1000);
+    const totalSeconds = timestamp === 0 ? timestamp : Math.floor((timestamp - now) / 1000);
     const days = Math.floor(totalSeconds / 86400);
     const hours = Math.floor((totalSeconds % 86400) / 3600);
     const minutes = Math.floor((totalSeconds % 3600) / 60);

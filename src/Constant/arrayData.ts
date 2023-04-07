@@ -1,5 +1,6 @@
 import { getMainConfig, getProjectDetailsById } from "src/Contracts";
 import { CoinCardProps, coinDataProps } from "./interface";
+import { UTCTimePrinter, currentTimeStamp } from "src/Utils/utcTimePrinter";
 
 // 0: all, 1: upcoming, 2: ongong, 3: ended
 
@@ -70,11 +71,11 @@ export const coinCardData = async () => {
   const coinCard: CoinCardProps[] = [];
   for(let i = 0; i < mainConfig.length; i++) {
     const project: coinDataProps = await getProjectDetailsById(mainConfig[i].id);
-    const now = new Date(Date.now()).getTime();
-    const kingpass_start = new Date(project.kingpass_start).getTime();
-    const kingpass_end = new Date(project.kingpass_end).getTime();
-    const presale_start = new Date(project.presale_start).getTime();
-    const presale_end = new Date(project.presale_end).getTime();
+    const now = currentTimeStamp();
+    const kingpass_start = UTCTimePrinter(project.kingpass_start);
+    const kingpass_end = UTCTimePrinter(project.kingpass_end);
+    const presale_start = UTCTimePrinter(project.presale_start);
+    const presale_end = UTCTimePrinter(project.presale_end);
 
     if(kingpass_start > now) {
       coinCard.push({
@@ -181,9 +182,9 @@ export const coinCardData = async () => {
 }
 
   const getKingStarterStatus = (data: coinDataProps) => {
-    const now = new Date(Date.now()).getTime();
-    const kingpass_start = new Date(data.kingpass_start).getTime();
-    const kingpass_end = new Date(data.kingpass_end).getTime();
+    const now = currentTimeStamp();
+    const kingpass_start = UTCTimePrinter(data.kingpass_start);
+    const kingpass_end = UTCTimePrinter(data.kingpass_end);
     let _status = '';
     if (kingpass_start > now) {
       _status = 'Upcoming';
@@ -198,9 +199,9 @@ export const coinCardData = async () => {
   };
 
   const getKingSaleStatus = (data: coinDataProps) => {
-    const now = new Date(Date.now()).getTime();
-    const presale_start = new Date(data.presale_start).getTime();
-    const presale_end = new Date(data.presale_end).getTime();
+    const now = currentTimeStamp();
+    const presale_start = UTCTimePrinter(data.presale_start);
+    const presale_end = UTCTimePrinter(data.presale_end);
     let _status = '';
     if (presale_start > now) {
       _status = 'Upcoming';

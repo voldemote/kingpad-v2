@@ -8,6 +8,7 @@ import { coinDataProps } from 'src/Constant/interface';
 import { useAccount } from 'wagmi';
 import { useWeb3Store } from 'src/Context/Web3Context';
 import { getUserPassActive } from 'src/Contracts/kingPad';
+import { UTCTimePrinter, currentTimeStamp } from 'src/Utils/utcTimePrinter';
 
 export const CoinDetailCards = (props: { data: coinDataProps }) => {
   const { data } = props;
@@ -32,9 +33,14 @@ export const CoinDetailCards = (props: { data: coinDataProps }) => {
   }, [data]);
 
   const getKingStarterStatus = () => {
-    const now = new Date(Date.now()).getTime();
-    const kingpass_start = new Date(data.kingpass_start).getTime();
-    const kingpass_end = new Date(data.kingpass_end).getTime();
+    const now = currentTimeStamp();
+    const kingpass_start = UTCTimePrinter(data.kingpass_start);
+    const kingpass_end = UTCTimePrinter(data.kingpass_end);
+
+    const _mystart = new Date(data.kingpass_start).getTime();
+    const _myend = new Date(data.kingpass_end).getTime();
+
+    console.log({ kingpass_start, kingpass_end, _mystart, _myend });
     let _status = '';
     if (kingpass_start < now) {
       _status = 'Upcoming';
@@ -49,10 +55,10 @@ export const CoinDetailCards = (props: { data: coinDataProps }) => {
   };
 
   const getTimeStamp = () => {
-    const now = new Date(Date.now()).getTime();
+    const now = currentTimeStamp();
 
-    const kingpass_start = new Date(data.kingpass_start).getTime();
-    const kingpass_end = new Date(data.kingpass_end).getTime();
+    const kingpass_start = UTCTimePrinter(data.kingpass_start);
+    const kingpass_end = UTCTimePrinter(data.kingpass_end);
 
     let _timeStamp = 0;
     if (status === 'Upcoming') {

@@ -14,6 +14,7 @@ import { RaisedCircle } from '../Progress/RaisedCircle';
 import { useWeb3Store } from 'src/Context/Web3Context';
 import { ethers } from 'ethers';
 import { getTotalDeposited } from 'src/Contracts/kingPad';
+import { currentTimeStamp } from 'src/Utils/utcTimePrinter';
 
 // status 1: upcoming, 2: ongong, 3: ended
 
@@ -134,10 +135,11 @@ const CountDown = (props: { timestamp: number }) => {
   const [timeLeft, setTimeLeft] = useState(getTimeLeft(timestamp));
 
   function getTimeLeft(timestamp: number) {
-    if (timestamp < Date.now()) {
-      timestamp = Date.now();
+    const now = currentTimeStamp();
+    if (timestamp < now) {
+      timestamp = now;
     }
-    const totalSeconds = timestamp === 0 ? timestamp : Math.floor((timestamp - Date.now()) / 1000);
+    const totalSeconds = timestamp === 0 ? timestamp : Math.floor((timestamp - now) / 1000);
     const days = Math.floor(totalSeconds / 86400);
     const hours = Math.floor((totalSeconds % 86400) / 3600);
     const minutes = Math.floor((totalSeconds % 3600) / 60);

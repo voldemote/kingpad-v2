@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 import { ButtonLoader } from '../Button/ButtonLoader';
 import { ethers } from 'ethers';
 import { finalize, getTotalDeposited } from 'src/Contracts/kingPad';
+import { currentTimeStamp } from 'src/Utils/utcTimePrinter';
 
 export const KingsaleStatusCard = (props: { status: string; currency: string; timeStamp: number }) => {
   const { status, currency, timeStamp } = props;
@@ -86,10 +87,11 @@ const CountDown = (props: { timestamp: number }) => {
   const [timeLeft, setTimeLeft] = useState(getTimeLeft(timestamp));
 
   function getTimeLeft(timestamp: number) {
-    if (timestamp < Date.now()) {
-      timestamp = Date.now();
+    const now = currentTimeStamp();
+    if (timestamp < now) {
+      timestamp = now;
     }
-    const totalSeconds = timestamp === 0 ? timestamp : Math.floor((timestamp - Date.now()) / 1000);
+    const totalSeconds = timestamp === 0 ? timestamp : Math.floor((timestamp - now) / 1000);
     const days = Math.floor(totalSeconds / 86400);
     const hours = Math.floor((totalSeconds % 86400) / 3600);
     const minutes = Math.floor((totalSeconds % 3600) / 60);
