@@ -34,6 +34,7 @@ export const getUserInfo = async (address: string) => {
 export const getUserPassActive = async (address: string | undefined) => {
   if (!isEmpty(provider) && !isEmpty(address) && !isEmpty(kingpass)) {
     const tx = await kingpass.checkIfPassActive(address);
+    console.log("kingpass Active: ", tx);
     return tx;
   }
 }

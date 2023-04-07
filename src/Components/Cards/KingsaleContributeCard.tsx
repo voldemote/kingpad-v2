@@ -128,12 +128,12 @@ export const KingSaleContributeCard = (props: CardProps) => {
         <CardLabelGroup>
           <CardLabel>Your contribution</CardLabel>
           <ValueLabel>
-            {contributeValue} {currency}
+            {totalcontributeValue} {currency}
           </ValueLabel>
         </CardLabelGroup>
         <CardLabelGroup>
           <CardLabel>You bought</CardLabel>
-          <ValueLabel>{tokenValue} COS</ValueLabel>
+          <ValueLabel>{totaltokenValue} COS</ValueLabel>
         </CardLabelGroup>
         <InputBox onClick={handleInputAreaClick}>
           <Input

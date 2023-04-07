@@ -120,7 +120,7 @@ export const KingStarterContributeCard = (props: CardProps) => {
       </PurchasedContainer>
       <CardLabel>Your contribution</CardLabel>
       <ValueLabel>
-        {ethers.utils.formatEther(contributeValue)} {currency}
+        {contributeValue} {currency}
       </ValueLabel>
       {/* <WithdrawButton disabled={isLoad} onClick={handleWithdraw}>
         {isLoad ? <ButtonLoader /> : 'Withdraw'}
