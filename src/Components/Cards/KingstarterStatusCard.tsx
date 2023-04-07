@@ -17,7 +17,7 @@ export const KingstarterStatusCard = (props: {
   const { status, currency, timeStamp, addressToken } = props;
 
   const { isConnected, isInitialized } = useWeb3Store();
-  const [raisedValue, setRaisedValue] = useState(0);
+  const [raisedValue, setRaisedValue] = useState('0');
 
   const getTotalDepositValue = async () => {
     const total = await getTotalDeposited();

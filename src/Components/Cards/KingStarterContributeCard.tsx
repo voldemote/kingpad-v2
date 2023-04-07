@@ -122,9 +122,9 @@ export const KingStarterContributeCard = (props: CardProps) => {
       <ValueLabel>
         {ethers.utils.formatEther(contributeValue)} {currency}
       </ValueLabel>
-      <WithdrawButton disabled={isLoad} onClick={handleWithdraw}>
+      {/* <WithdrawButton disabled={isLoad} onClick={handleWithdraw}>
         {isLoad ? <ButtonLoader /> : 'Withdraw'}
-      </WithdrawButton>
+      </WithdrawButton> */}
     </CardBox>
   );
 };

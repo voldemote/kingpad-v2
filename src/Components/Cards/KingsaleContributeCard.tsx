@@ -91,6 +91,7 @@ export const KingSaleContributeCard = (props: CardProps) => {
     if (address !== undefined) {
       const res = await getUserInfo(address);
       setTotalContributeValue(res?.amount ?? 0);
+      setTotalTokenValue(res?.tokenTogGet ?? 0);
     }
   };
 
@@ -116,7 +117,7 @@ export const KingSaleContributeCard = (props: CardProps) => {
             <Input type="number" ref={buyRef} value={buyVal} />
           </InputBox>
           <ClaimButton>Buy now</ClaimButton>
-          <ClaimButton>Withdraw {currency}</ClaimButton>
+          {/* <ClaimButton>Withdraw {currency}</ClaimButton> */}
           <ClaimLabel>Wait for the sale to Start</ClaimLabel>
         </ClaimButtonGroup>
       </CardBox>
@@ -145,9 +146,9 @@ export const KingSaleContributeCard = (props: CardProps) => {
         <ClaimButton variant="contained" disabled={isLoad} onClick={handleDeposit}>
           {isLoad ? <ButtonLoader /> : 'Buy now'}
         </ClaimButton>
-        <ClaimButton disabled={isLoad} onClick={handleWithdraw}>
+        {/* <ClaimButton disabled={isLoad} onClick={handleWithdraw}>
           {isLoad ? <ButtonLoader /> : `Withdraw ${currency}`}
-        </ClaimButton>
+        </ClaimButton> */}
       </CardBox>
     );
   } else {
@@ -167,7 +168,7 @@ export const KingSaleContributeCard = (props: CardProps) => {
           {/*           <CardLabel>Congratulations!</CardLabel>
           <ValueLabel>You already claimed Your token</ValueLabel> */}
         </CardLabelGroup>
-        <ClaimButtonGroup>
+        {/* <ClaimButtonGroup>
           {finalizedAndOk === 2 ? (
             <ClaimButton disabled={isLoad}>{isLoad ? <ButtonLoader /> : 'Claim now'}</ClaimButton>
           ) : finalizedAndOk === 1 ? (
@@ -178,7 +179,7 @@ export const KingSaleContributeCard = (props: CardProps) => {
               <ClaimLabel>Wait the sale to be finalised</ClaimLabel>
             </>
           )}
-        </ClaimButtonGroup>
+        </ClaimButtonGroup> */}
       </CardBox>
     );
   }

@@ -10,7 +10,7 @@ import { KingFilterButton } from '../Button/KingFilterButton';
 import { toast } from 'react-toastify';
 import { ButtonLoader } from '../Button/ButtonLoader';
 import { ethers } from 'ethers';
-import { finalize } from 'src/Contracts/kingPad';
+import { finalize, getTotalDeposited } from 'src/Contracts/kingPad';
 
 export const KingsaleStatusCard = (props: { status: string; currency: string; timeStamp: number }) => {
   const { status, currency, timeStamp } = props;
@@ -23,6 +23,19 @@ export const KingsaleStatusCard = (props: { status: string; currency: string; ti
   const handleFinalize = async () => {
     await finalize();
   };
+
+  const getTotalDepositValue = async () => {
+    const total = await getTotalDeposited();
+    if (total !== undefined) {
+      setRaisedValue(total);
+    }
+  };
+
+  useEffect(() => {
+    if (isConnected) {
+      getTotalDepositValue();
+    }
+  }, [isConnected, isInitialized]);
 
   return (
     <CardBox about="Ends-In-Card">

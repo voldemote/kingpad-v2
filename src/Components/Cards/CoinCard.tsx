@@ -38,12 +38,12 @@ export const CoinCard = (props: CoinCardProps) => {
 
   const [totalContribution, setTotalContribution] = useState(0);
   const { isConnected, isInitialized } = useWeb3Store();
-  const [raisedValue, setRaisedValue] = useState(0);
+  const [raisedValue, setRaisedValue] = useState('0');
 
   const getTotalDepositValue = async () => {
     const total = await getTotalDeposited();
     if (total !== undefined) {
-      setTotalContribution(total);
+      setTotalContribution(parseFloat(total));
       setRaisedValue(total);
     }
   };

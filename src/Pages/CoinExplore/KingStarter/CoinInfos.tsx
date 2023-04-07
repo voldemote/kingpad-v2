@@ -12,8 +12,6 @@ export const CoinInfos = (props: { data: coinDataProps; projectId: number }) => 
   return (
     <CoinInfosContainer>
       <CoinInfosBox>
-        {/* <CoinInfo name="Presale Address" value={data.router} /> */}
-        <CoinInfo name="Presale Address" value=" -" /> {/* @todo ? : se finito fajo vede */}
         <CoinInfo name="Token Name" value={data.name} />
         <CoinInfo name="Token Symbol" value={data.symbol} />
         <CoinInfo name="Token Decimals" value={data.decimals} />

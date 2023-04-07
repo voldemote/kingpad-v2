@@ -21,10 +21,12 @@ export const kingpadInitialize = async (provider_: any, signer_: any, chainId: n
 export const getUserInfo = async (address: string) => {
     if(!isEmpty(signer) && !isEmpty(kingpad)) {
         const ownerData = await kingpad.userDB(address);
-        const amount = parseFloat(ownerData[0].toString());
-        const isWhitelisted = ownerData[1];
-        const tokenTogGet = parseFloat(ownerData[2].toString());
+        console.log({ ownerData })
+        const amount = parseFloat(ethers.utils.formatEther(ownerData[0].toString()));
+        const tokenTogGet = parseFloat(ethers.utils.formatEther(ownerData[1].toString()));
+        const isWhitelisted = ownerData[2];
         console.log("depositAmount: ", amount);
+        console.log({ amount, isWhitelisted, tokenTogGet })
         return { amount, isWhitelisted, tokenTogGet };
     }
 }
@@ -107,7 +109,7 @@ export const deposit = async (amount_: string) => {
 export const getTotalDeposited = async () => {
     if(!isEmpty(signer) && !isEmpty(kingpad)) {
         const res = await kingpad.totalDeposited();
-        const total = parseFloat(ethers.utils.formatEther(res.toString()));
+        const total = ethers.utils.formatEther(res.toString());
         return total;
     }
 }

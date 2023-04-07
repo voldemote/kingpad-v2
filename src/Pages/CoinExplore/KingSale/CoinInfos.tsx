@@ -17,17 +17,6 @@ export const CoinInfos = (props: { data: coinDataProps; projectId: number }) => 
   return (
     <CoinInfosContainer>
       <CoinInfosBox>
-        <CoinInfo
-          name="Presale Address"
-          value={
-            <CopyToClipboard>
-              {({ copy }) => (
-                <CoinInfoValue onClick={() => copy(presaleAddress ?? '_')}>{presaleAddress ?? '_'}</CoinInfoValue>
-              )}
-            </CopyToClipboard>
-          }
-          cursor="pointer"
-        />
         <CoinInfo name="Token Name" value={data.name} />
         <CoinInfo name="Token Symbol" value={data.symbol} />
         <CoinInfo name="Token Decimals" value={data.decimals} />

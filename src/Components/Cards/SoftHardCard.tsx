@@ -22,7 +22,7 @@ export const SoftHardCard = (props: {
   const getTotalDepositValue = async () => {
     const total = await getTotalDeposited();
     if (total !== undefined) {
-      setTotalContribution(total);
+      setTotalContribution(parseFloat(total));
     }
   };
 
