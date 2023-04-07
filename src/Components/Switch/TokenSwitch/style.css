@@ -1,0 +1,8 @@
+.checkbox {
+  opacity: 0;
+  position: absolute;
+}
+
+.checkbox:checked + .label .baller {
+  transform: translateX(56px);
+}
