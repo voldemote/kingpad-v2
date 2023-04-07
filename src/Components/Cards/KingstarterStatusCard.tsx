@@ -6,6 +6,7 @@ import { styled } from '@mui/system';
 import { useAccount } from 'wagmi';
 import { useWeb3Store } from 'src/Context/Web3Context';
 import { KingFilterButton } from '../Button/KingFilterButton';
+import { getTotalDeposited } from 'src/Contracts/kingPad';
 
 export const KingstarterStatusCard = (props: {
   status: string;
@@ -16,7 +17,20 @@ export const KingstarterStatusCard = (props: {
   const { status, currency, timeStamp, addressToken } = props;
 
   const { isConnected, isInitialized } = useWeb3Store();
-  const [raisedValue, setRaisedValue] = useState('0');
+  const [raisedValue, setRaisedValue] = useState(0);
+
+  const getTotalDepositValue = async () => {
+    const total = await getTotalDeposited();
+    if (total !== undefined) {
+      setRaisedValue(total);
+    }
+  };
+
+  useEffect(() => {
+    if (isConnected) {
+      getTotalDepositValue();
+    }
+  }, [isConnected, isInitialized]);
 
   return (
     <CardBox about="Ends-In-Card">

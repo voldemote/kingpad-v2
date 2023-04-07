@@ -75,8 +75,6 @@ export interface CoinCardProps {
   telegram: string;
   twitter: string;
   youtube: string;
-  facebook: string;
-  discord: string;
 }
 
 interface BadgeProps {

@@ -5,6 +5,7 @@ import { useWeb3Store } from 'src/Context/Web3Context';
 import { RaisedProgressBar } from '../Progress/RaisedProgress';
 import { SmallText } from '../Text/SmallText';
 import { ethers } from 'ethers';
+import { getTotalDeposited } from 'src/Contracts/kingPad';
 
 export const SoftHardCard = (props: {
   minValue: number;
@@ -17,6 +18,19 @@ export const SoftHardCard = (props: {
   const [totalContribution, setTotalContribution] = useState(0);
 
   const { isConnected, isInitialized } = useWeb3Store();
+
+  const getTotalDepositValue = async () => {
+    const total = await getTotalDeposited();
+    if (total !== undefined) {
+      setTotalContribution(total);
+    }
+  };
+
+  useEffect(() => {
+    if (isConnected) {
+      getTotalDepositValue();
+    }
+  }, [isConnected, isInitialized]);
 
   return (
     <SoftHardCardContainer>

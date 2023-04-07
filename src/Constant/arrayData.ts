@@ -90,9 +90,7 @@ export const coinCardData = async () => {
         website: project.website,
         twitter: project.twitter,
         telegram: project.telegram,
-        youtube: project.youtube,
-        discord: project.discord,
-        facebook: project.facebook
+        youtube: project.youtube
       });
     } else if (kingpass_start < now && kingpass_end > now) {
        coinCard.push({
@@ -108,9 +106,7 @@ export const coinCardData = async () => {
         website: project.website,
         twitter: project.twitter,
         telegram: project.telegram,
-        youtube: project.youtube,
-        discord: project.discord,
-        facebook: project.facebook
+        youtube: project.youtube
       });
     } else if (kingpass_end < now) {
       coinCard.push({
@@ -126,9 +122,7 @@ export const coinCardData = async () => {
         website: project.website,
         twitter: project.twitter,
         telegram: project.telegram,
-        youtube: project.youtube,
-        discord: project.discord,
-        facebook: project.facebook
+        youtube: project.youtube
       });
     }
 
@@ -146,9 +140,7 @@ export const coinCardData = async () => {
         website: project.website,
         twitter: project.twitter,
         telegram: project.telegram,
-        youtube: project.youtube,
-        discord: project.discord,
-        facebook: project.facebook
+        youtube: project.youtube
       });
     } else if (presale_start < now && presale_end > now) {
        coinCard.push({
@@ -164,9 +156,7 @@ export const coinCardData = async () => {
         website: project.website,
         twitter: project.twitter,
         telegram: project.telegram,
-        youtube: project.youtube,
-        discord: project.discord,
-        facebook: project.facebook
+        youtube: project.youtube
       });
     } else if(presale_end < now) {
        coinCard.push({
@@ -182,9 +172,7 @@ export const coinCardData = async () => {
         website: project.website,
         twitter: project.twitter,
         telegram: project.telegram,
-        youtube: project.youtube,
-        discord: project.discord,
-        facebook: project.facebook
+        youtube: project.youtube
       });
     }
   }

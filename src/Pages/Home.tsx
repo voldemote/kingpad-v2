@@ -113,8 +113,6 @@ export const Home = () => {
             twitter={card.twitter}
             telegram={card.telegram}
             youtube={card.youtube}
-            discord={card.discord}
-            facebook={card.facebook}
             key={card.id}
             id={card.id}
           />

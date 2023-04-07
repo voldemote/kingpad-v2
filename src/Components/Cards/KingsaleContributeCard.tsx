@@ -102,7 +102,7 @@ export const KingSaleContributeCard = (props: CardProps) => {
 
   if (status === 'Upcoming') {
     return (
-      <CardBox about="Contribute-Card" status={status}>
+      <CardBox about="Contribute-Card">
         <CardLabelGroup>
           <CardLabel>Your contribution</CardLabel>
           <ValueLabel>0 {currency}</ValueLabel>
@@ -113,17 +113,17 @@ export const KingSaleContributeCard = (props: CardProps) => {
         </CardLabelGroup>
         <ClaimButtonGroup>
           <InputBox onClick={handleInputAreaClick}>
-            <Input disabled={true} type="number" ref={buyRef} value={buyVal} />
+            <Input type="number" ref={buyRef} value={buyVal} />
           </InputBox>
-          <ClaimButton disabled={true}>Buy now</ClaimButton>
-          <ClaimButton disabled={true}>Withdraw {currency}</ClaimButton>
+          <ClaimButton>Buy now</ClaimButton>
+          <ClaimButton>Withdraw {currency}</ClaimButton>
           <ClaimLabel>Wait for the sale to Start</ClaimLabel>
         </ClaimButtonGroup>
       </CardBox>
     );
   } else if (status === 'Ongoing') {
     return (
-      <CardBox about="Contribute-Card" status={status}>
+      <CardBox about="Contribute-Card">
         <CardLabelGroup>
           <CardLabel>Your contribution</CardLabel>
           <ValueLabel>
@@ -145,14 +145,14 @@ export const KingSaleContributeCard = (props: CardProps) => {
         <ClaimButton variant="contained" disabled={isLoad} onClick={handleDeposit}>
           {isLoad ? <ButtonLoader /> : 'Buy now'}
         </ClaimButton>
-        <ClaimButton disabled={status !== 'Ongoing' || isLoad} onClick={handleWithdraw}>
+        <ClaimButton disabled={isLoad} onClick={handleWithdraw}>
           {isLoad ? <ButtonLoader /> : `Withdraw ${currency}`}
         </ClaimButton>
       </CardBox>
     );
   } else {
     return (
-      <CardBox about="Contribute-Card" status={status}>
+      <CardBox about="Contribute-Card">
         <CardLabelGroup>
           <CardLabel>Your contribution</CardLabel>
           <ValueLabel>
@@ -169,16 +169,12 @@ export const KingSaleContributeCard = (props: CardProps) => {
         </CardLabelGroup>
         <ClaimButtonGroup>
           {finalizedAndOk === 2 ? (
-            <ClaimButton disabled={contributeValue === 0 || isLoad}>
-              {isLoad ? <ButtonLoader /> : 'Claim now'}
-            </ClaimButton>
+            <ClaimButton disabled={isLoad}>{isLoad ? <ButtonLoader /> : 'Claim now'}</ClaimButton>
           ) : finalizedAndOk === 1 ? (
-            <ClaimButton disabled={contributeValue === 0 || isLoad}>
-              {isLoad ? <ButtonLoader /> : 'Withdraw'}
-            </ClaimButton>
+            <ClaimButton disabled={isLoad}>{isLoad ? <ButtonLoader /> : 'Withdraw'}</ClaimButton>
           ) : (
             <>
-              <ClaimButton disabled={true}>Claim now</ClaimButton>
+              <ClaimButton>Claim now</ClaimButton>
               <ClaimLabel>Wait the sale to be finalised</ClaimLabel>
             </>
           )}
@@ -188,7 +184,7 @@ export const KingSaleContributeCard = (props: CardProps) => {
   }
 };
 
-const CardBox = styled(Box)<{ status: string }>(({ theme, status }) => ({
+const CardBox = styled(Box)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -198,8 +194,7 @@ const CardBox = styled(Box)<{ status: string }>(({ theme, status }) => ({
   gap: '26px',
   backgroundColor: '#1E0041',
   boxShadow: '0px 3px 6px #00000029',
-  borderRadius: '15px',
-  opacity: status === 'Ongoing' ? 1 : 0.6
+  borderRadius: '15px'
 }));
 
 const CardLabel = styled(Box)(({ theme }) => ({

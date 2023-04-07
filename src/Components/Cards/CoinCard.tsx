@@ -31,9 +31,7 @@ export const CoinCard = (props: CoinCardProps) => {
     website,
     twitter,
     telegram,
-    youtube,
-    discord,
-    facebook
+    youtube
   } = props;
 
   const navigate = useNavigate();
@@ -91,12 +89,6 @@ export const CoinCard = (props: CoinCardProps) => {
             </TokenLink>
             <TokenLink href={youtube} rel="noopener noreferrer" target="_blank">
               <YouTube sx={{ width: '18px', height: '18px' }} />
-            </TokenLink>
-            <TokenLink href={discord} rel="noopener noreferrer" target="_blank">
-              <FaDiscord style={{ width: '18px', height: '18px' }} />
-            </TokenLink>
-            <TokenLink href={facebook} rel="noopener noreferrer" target="_blank">
-              <FaFacebookF style={{ width: '14px', height: '14px' }} />
             </TokenLink>
           </TokenLinks>
         </TokenDetails>
