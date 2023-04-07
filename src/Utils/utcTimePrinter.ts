@@ -1,12 +1,12 @@
 export const UTCTimePrinter = (time: string) => {
     const timestamp = Date.UTC(
-      new Date(time).getUTCFullYear(),
-      new Date(time).getUTCMonth(),
-      new Date(time).getUTCDate(),
-      new Date(time).getUTCHours(),
-      new Date(time).getUTCMinutes(),
-      new Date(time).getUTCSeconds(),
-      new Date(time).getUTCMilliseconds()
+      new Date(time + "Z").getUTCFullYear(),
+      new Date(time + "Z").getUTCMonth(),
+      new Date(time + "Z").getUTCDate(),
+      new Date(time + "Z").getUTCHours(),
+      new Date(time + "Z").getUTCMinutes(),
+      new Date(time + "Z").getUTCSeconds(),
+      new Date(time + "Z").getUTCMilliseconds()
     );
     return timestamp;
 }
