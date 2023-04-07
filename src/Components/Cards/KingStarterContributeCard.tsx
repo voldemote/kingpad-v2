@@ -7,6 +7,7 @@ import { useAccount, useNetwork } from 'wagmi';
 import { useWeb3Store } from 'src/Context/Web3Context';
 import { ButtonLoader } from '../Button/ButtonLoader';
 import { ethers } from 'ethers';
+import { deposit, getUserInfo, withdraw } from 'src/Contracts/kingPad';
 
 interface CardProps {
   status: string;
@@ -37,6 +38,65 @@ export const KingStarterContributeCard = (props: CardProps) => {
     buyRef.current?.focus();
   };
 
+  const handleDeposit = async () => {
+    if (minBuy !== undefined && maxBuy !== undefined && currency !== undefined) {
+      if (buyVal < minBuy) {
+        toast.error(`Amount should be more than ${minBuy} ${currency}`);
+      } else if (buyVal > maxBuy) {
+        toast.error(`Amount should be less than ${maxBuy} ${currency}`);
+      } else {
+        if (tokenAddress !== undefined && chain !== undefined) {
+          setLoad(true);
+          try {
+            await deposit(ethers.utils.parseEther(buyVal.toString()).toString());
+            await getUserInfos();
+          } catch (err: any) {
+            // toast.error(`you need to wait at least 24 hours to withdraw your $KING`, err);
+            const revertData = err.reason || err.message;
+            // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+            toast.error(`Transaction failed: ${revertData}`);
+            // errMsg !== "" ? toast.error(errMsg, err) :
+            setLoad(false);
+          }
+          setLoad(false);
+        }
+      }
+    }
+  };
+
+  const handleWithdraw = async () => {
+    if (chain === undefined) return;
+    setLoad(true);
+    try {
+      await withdraw();
+      await getUserInfos();
+      // if (address !== undefined) {
+      //   getContributeValue(address);
+      // }
+    } catch (err: any) {
+      // toast.error(`you need to wait at least 24 hours to withdraw your $KING`, err);
+      const revertData = err.reason || err.message;
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+      toast.error(`Transaction failed: ${revertData}`);
+      // errMsg !== "" ? toast.error(errMsg, err) :
+      setLoad(false);
+    }
+    setLoad(false);
+  };
+
+  const getUserInfos = async () => {
+    if (address !== undefined) {
+      const res = await getUserInfo(address);
+      setContributeValue(res?.amount ?? 0);
+    }
+  };
+
+  useEffect(() => {
+    if (isConnected) {
+      getUserInfos();
+    }
+  }, [isConnected, isInitialized]);
+
   return (
     <CardBox about="Contribute-Card">
       <CardLabel>Contriubte now</CardLabel>
@@ -50,7 +110,9 @@ export const KingStarterContributeCard = (props: CardProps) => {
           />
           <ValueLabel>{currency}</ValueLabel>
         </InputBox>
-        <CardButton disabled={isLoad}>{isLoad ? <ButtonLoader /> : 'Buy'}</CardButton>
+        <CardButton disabled={isLoad} onClick={handleDeposit}>
+          {isLoad ? <ButtonLoader /> : 'Buy'}
+        </CardButton>
       </CardButtonGroup>
       <PurchasedContainer>
         <Purchased name="Min buy" value={minBuy} currency={currency} />
@@ -60,7 +122,9 @@ export const KingStarterContributeCard = (props: CardProps) => {
       <ValueLabel>
         {ethers.utils.formatEther(contributeValue)} {currency}
       </ValueLabel>
-      <WithdrawButton disabled={isLoad}>{isLoad ? <ButtonLoader /> : 'Withdraw'}</WithdrawButton>
+      <WithdrawButton disabled={isLoad} onClick={handleWithdraw}>
+        {isLoad ? <ButtonLoader /> : 'Withdraw'}
+      </WithdrawButton>
     </CardBox>
   );
 };
