@@ -10,6 +10,7 @@ import { getProjectDetailsById } from 'src/Contracts';
 import { coinDataProps } from 'src/Constant/interface';
 import { useAccount } from 'wagmi';
 import { useWeb3Store } from 'src/Context/Web3Context';
+import { getKingState, kingpadIsActive } from 'src/Contracts/kingPad';
 
 export const KingSaleExplore = () => {
   const [coinData, setCoinData] = useState<coinDataProps>();
@@ -26,9 +27,22 @@ export const KingSaleExplore = () => {
     setCoinData(data);
   };
 
+  const isKingPadActive = async () => {
+    const isActive = await kingpadIsActive();
+    console.log('kingpadActive: ', isActive);
+  };
+
+  const getKingStatus = async () => {
+    const state = await getKingState();
+    console.log('kingState: ', state);
+  };
+
   useEffect(() => {
     if (isConnected && address !== undefined) {
       getCoinData(address);
+
+      isKingPadActive();
+      getKingStatus();
     } else {
       getCoinData('');
     }

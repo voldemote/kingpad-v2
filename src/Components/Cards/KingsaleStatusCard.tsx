@@ -10,15 +10,19 @@ import { KingFilterButton } from '../Button/KingFilterButton';
 import { toast } from 'react-toastify';
 import { ButtonLoader } from '../Button/ButtonLoader';
 import { ethers } from 'ethers';
+import { finalize } from 'src/Contracts/kingPad';
 
 export const KingsaleStatusCard = (props: { status: string; currency: string; timeStamp: number }) => {
   const { status, currency, timeStamp } = props;
-  console.log({ timeStamp });
   const { address } = useAccount();
   const { isConnected, isInitialized } = useWeb3Store();
   const [raisedValue, setRaisedValue] = useState('0');
   const [isAdmin, setAdmin] = useState(false);
   const [isLoad, setLoad] = useState(false);
+
+  const handleFinalize = async () => {
+    await finalize();
+  };
 
   return (
     <CardBox about="Ends-In-Card">
@@ -55,7 +59,9 @@ export const KingsaleStatusCard = (props: { status: string; currency: string; ti
           {status === 'Upcoming' && 'Starts in'}
           {status === 'Ended' && 'Kingsale ended'}
         </CardLabel>
-        {status === 'Ended' && isAdmin && <Kingsale>{isLoad ? <ButtonLoader /> : 'Finalise'}</Kingsale>}
+        {status === 'Ended' && isAdmin && (
+          <Kingsale onClick={handleFinalize}>{isLoad ? <ButtonLoader /> : 'Finalize'}</Kingsale>
+        )}
         {status !== 'Ended' && <CountDown timestamp={timeStamp} />}
       </EndInContainer>
     </CardBox>

@@ -7,7 +7,7 @@ import { useWeb3Store } from 'src/Context/Web3Context';
 import { SoftHardCard } from 'src/Components/Cards/SoftHardCard';
 import { KingsaleStatusCard } from 'src/Components/Cards/KingsaleStatusCard';
 import { KingSaleContributeCard } from 'src/Components/Cards/KingsaleContributeCard';
-import { getUserPassActive } from 'src/Contracts/kingPad';
+import { getMaxBuy, getMinBuy, getUserPassActive } from 'src/Contracts/kingPad';
 
 export const CoinDetailCards = (props: { data: coinDataProps }) => {
   const { data } = props;
@@ -18,6 +18,8 @@ export const CoinDetailCards = (props: { data: coinDataProps }) => {
   const [hasKing, setHasKing] = useState(false);
   const [currency, setCurrency] = useState('BNB');
   const [timestamp, setTimeStamp] = useState(0);
+  const [minBuy, setMinBuy] = useState(0);
+  const [maxBuy, setMaxBuy] = useState(0);
 
   const getUserActive = async () => {
     if (address !== undefined) {
@@ -26,8 +28,14 @@ export const CoinDetailCards = (props: { data: coinDataProps }) => {
     }
   };
 
+  const setBuyLimitValue = async () => {
+    const _minBuy = await getMinBuy();
+    const _maxBuy = await getMaxBuy();
+    setMinBuy(_minBuy ?? 0);
+    setMaxBuy(_maxBuy ?? 0);
+  };
+
   useEffect(() => {
-    console.log({ data });
     getKingStarterStatus();
     getTimeStamp();
     setCurrency(data.currency ?? 'BNB');
@@ -51,8 +59,6 @@ export const CoinDetailCards = (props: { data: coinDataProps }) => {
   };
 
   const getTimeStamp = () => {
-    console.log('getTimeStamp');
-    console.log(data.presale_start, data.presale_end);
     const now = new Date(Date.now()).getTime();
     const presale_start = new Date(data.presale_start).getTime();
     const presale_end = new Date(data.presale_end).getTime();
@@ -65,7 +71,6 @@ export const CoinDetailCards = (props: { data: coinDataProps }) => {
     } else if (status === 'Ended') {
       _timeStamp = now;
     }
-    console.log(_timeStamp);
     setTimeStamp(_timeStamp);
   };
 
@@ -76,6 +81,7 @@ export const CoinDetailCards = (props: { data: coinDataProps }) => {
   useEffect(() => {
     if (isConnected) {
       getUserActive();
+      setBuyLimitValue();
     }
   }, [isInitialized, isConnected]);
 
@@ -83,16 +89,16 @@ export const CoinDetailCards = (props: { data: coinDataProps }) => {
     <CoinDetailCardsBox>
       <KingsaleStatusCard status={status} currency={currency} timeStamp={timestamp} />
       <SoftHardCard
-        minValue={data.min_contribution}
-        maxValue={data.max_contribution}
+        minValue={minBuy}
+        maxValue={maxBuy}
         softcap={data.soft_cap}
         hardcap={data.hard_cap}
         currency={currency}
       />
       <KingSaleContributeCard
         status={status}
-        minBuy={data.min_contribution}
-        maxBuy={data.max_contribution}
+        minBuy={minBuy}
+        maxBuy={maxBuy}
         currency={data.currency}
         tokenAddress={data.token_address}
       />

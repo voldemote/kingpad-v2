@@ -22,15 +22,12 @@ export const Header = () => {
   const { isConnected, isInitialized } = useWeb3Store();
 
   const getUserHasKingpass = async () => {
-    console.log('azazzzzazz_prima');
     const hasKing = await getUserPassActive(address);
-    console.log('azazzzzazz_dopo', hasKing);
     setStatus(hasKing === true ? 1 : 0);
   };
 
   useEffect(() => {
     if (isConnected) {
-      console.log('DIOINFIAMME');
       getUserHasKingpass();
     } else {
       setStatus(2);

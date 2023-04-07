@@ -37,7 +37,6 @@ export const SidebarItems = (props: SidebarItemProps) => {
   const { isConnected, isInitialized } = useWeb3Store();
   const media = window.matchMedia(`(max-width: 1024px)`);
   const handleLinkClicked = (val: number) => {
-    console.log('handleLinkClicked', val);
     if (setOpen != null) setOpen(false);
     setPage(val);
     switch (val) {
@@ -61,13 +60,11 @@ export const SidebarItems = (props: SidebarItemProps) => {
 
   const getUserHasKingpass = async () => {
     const hasKing = await getUserPassActive(address);
-    console.log('azazzzzazz_dopo', hasKing);
     setStatus(hasKing === true ? 1 : 0);
   };
 
   useEffect(() => {
     if (isConnected) {
-      console.log('DIOINFIAMME');
       getUserHasKingpass();
     } else {
       setStatus(2);

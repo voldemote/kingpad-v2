@@ -19,28 +19,37 @@ export const kingpadInitialize = async (provider_: any, signer_: any, chainId: n
 }
 
 export const getUserInfo = async (address: string) => {
-    const ownerData = await kingpad.userDB(address);
-    console.log({ ownerData })
+    if(!isEmpty(signer) && !isEmpty(kingpad)) {
+        const ownerData = await kingpad.userDB(address);
+        const amount = parseFloat(ownerData[0].toString());
+        const isWhitelisted = ownerData[1];
+        const tokenTogGet = parseFloat(ownerData[2].toString());
+        console.log("depositAmount: ", amount);
+        return { amount, isWhitelisted, tokenTogGet };
+    }
 }
 
 export const getUserPassActive = async (address: string | undefined) => {
   if (!isEmpty(provider) && !isEmpty(address) && !isEmpty(kingpass)) {
     const tx = await kingpass.checkIfPassActive(address);
-    console.log({ tx });
     return tx;
   }
 }
 
 export const getMinBuy = async () => {
     if(!isEmpty(signer) && !isEmpty(kingpad)) {
-        const minBuy = await kingpad.minBuy();
+        const res = await kingpad.minBuy();
+        const minBuy = parseFloat(ethers.utils.formatEther(res));
+        console.log("minBuy: ", minBuy)
         return minBuy;
     }
 }
 
 export const getMaxBuy = async () => {
     if(!isEmpty(signer) && !isEmpty(kingpad)) {
-        const maxBuy = await kingpad.maxBuy();
+        const res = await kingpad.maxBuy();
+        const maxBuy = parseFloat(ethers.utils.formatEther(res));
+        console.log("maxBuy: ", maxBuy)
         return maxBuy;
     }
 }
@@ -92,5 +101,13 @@ export const deposit = async (amount_: string) => {
     if(!isEmpty(signer) && !isEmpty(kingpad)) {
        await kingpad.deposit({ value: amount });
        toast.success(`Deposit success!`);
+    }
+}
+
+export const getTotalDeposited = async () => {
+    if(!isEmpty(signer) && !isEmpty(kingpad)) {
+        const res = await kingpad.totalDeposited();
+        const total = parseFloat(ethers.utils.formatEther(res.toString()));
+        return total;
     }
 }

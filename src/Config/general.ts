@@ -10,13 +10,11 @@ const getChainId = (id: number) => {
     }
     if(id === 56) {
         generalData.rpcUrl = "https://bsc-dataseed1.binance.org/";
-        console.log("getKingAddress: ", kingPad.bscmain)
         generalData.tokenAddy = "";
         generalData.kingAddy = "";
         generalData.kingpassAddy = "";
         generalData.kingpadAddy = kingPad.bscmain;
     } else if (id === 80001) {
-        console.log(id)
         generalData.rpcUrl = "https://polygon-mumbai.infura.io/v3/4458cf4d1689497b9a38b1d6bbf05e78";
         generalData.tokenAddy = "";
         generalData.kingAddy = "";

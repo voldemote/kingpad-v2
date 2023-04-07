@@ -13,6 +13,7 @@ import { CoinStatusOnlyIcon } from '../CoinStatus';
 import { RaisedCircle } from '../Progress/RaisedCircle';
 import { useWeb3Store } from 'src/Context/Web3Context';
 import { ethers } from 'ethers';
+import { getTotalDeposited } from 'src/Contracts/kingPad';
 
 // status 1: upcoming, 2: ongong, 3: ended
 
@@ -39,11 +40,21 @@ export const CoinCard = (props: CoinCardProps) => {
 
   const [totalContribution, setTotalContribution] = useState(0);
   const { isConnected, isInitialized } = useWeb3Store();
-  const [raisedValue, setRaisedValue] = useState('0');
+  const [raisedValue, setRaisedValue] = useState(0);
+
+  const getTotalDepositValue = async () => {
+    const total = await getTotalDeposited();
+    if (total !== undefined) {
+      setTotalContribution(total);
+      setRaisedValue(total);
+    }
+  };
 
   useEffect(() => {
-    console.log('coincard', { status });
-  }, []);
+    if (isConnected) {
+      getTotalDepositValue();
+    }
+  }, [isConnected, isInitialized]);
 
   return (
     <CardContainer>
@@ -93,7 +104,7 @@ export const CoinCard = (props: CoinCardProps) => {
       <TokenProgress>
         <TokenProgressGraph>
           {isKingStarter ? (
-            <RaisedCircle raised={parseFloat(raisedValue)} />
+            <RaisedCircle raised={parseFloat(raisedValue.toString())} />
           ) : (
             <CircularProgressBar percentage={parseFloat(((totalContribution / hardCap) * 100).toFixed(1))} />
           )}
@@ -134,7 +145,6 @@ const CountDown = (props: { timestamp: number }) => {
     if (timestamp < Date.now()) {
       timestamp = Date.now();
     }
-    console.log('getTimeLeft:', timestamp, ',', Date.now());
     const totalSeconds = timestamp === 0 ? timestamp : Math.floor((timestamp - Date.now()) / 1000);
     const days = Math.floor(totalSeconds / 86400);
     const hours = Math.floor((totalSeconds % 86400) / 3600);

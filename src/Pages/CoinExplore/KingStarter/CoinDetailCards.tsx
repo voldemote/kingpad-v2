@@ -27,7 +27,6 @@ export const CoinDetailCards = (props: { data: coinDataProps }) => {
   };
 
   useEffect(() => {
-    console.log({ data });
     getKingStarterStatus();
     setCurrency(data.currency);
   }, [data]);
@@ -50,8 +49,6 @@ export const CoinDetailCards = (props: { data: coinDataProps }) => {
   };
 
   const getTimeStamp = () => {
-    console.log('getTimeStamp');
-    console.log(data.kingpass_start, data.kingpass_end);
     const now = new Date(Date.now()).getTime();
 
     const kingpass_start = new Date(data.kingpass_start).getTime();
@@ -65,7 +62,6 @@ export const CoinDetailCards = (props: { data: coinDataProps }) => {
     } else if (status === 'Ended') {
       _timeStamp = now;
     }
-    console.log(_timeStamp);
     setTimeStamp(_timeStamp);
   };
 

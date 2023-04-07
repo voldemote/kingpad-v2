@@ -228,7 +228,6 @@ export const coinCardData = async () => {
 
 export const getKingStarterCardTime = (status: string, data: coinDataProps) => {
   let time;
-  console.log("getCardTime: ", status)
    const kingpass_start = new Date(data.kingpass_start).getTime();
   const kingpass_end = new Date(data.kingpass_end).getTime();
     if(status === "Upcoming") {
@@ -241,7 +240,6 @@ export const getKingStarterCardTime = (status: string, data: coinDataProps) => {
 
 export const getKingStaleCardTime = (status: string, data: coinDataProps) => {
   let time;
-  console.log("getCardTime: ", status)
   const presale_start = new Date(data.presale_start).getTime();
   const presale_end = new Date(data.presale_end).getTime();
   if(status === "Upcoming") {

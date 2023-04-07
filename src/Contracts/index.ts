@@ -7,7 +7,6 @@ import { ActivePresaleProps, KingPadResponse, projectSettingProps, tokenDataProp
 export const getProjectDetails = async (address: string) => {
   const response = await axios.get(`https://${apiName}.kingpad.finance/get_project_by_owner?owner=${address}`)
   const projectId = response.data.id;
-  console.log("getProjectDetails: ", projectId, response.data)
   if (projectId !== undefined || response.data.error) {
     // const res = await axios.get(`https://${apiName}.kingpad.finance/project_details?id=${parseInt(projectId)}`);
     const res = await axios.get(`https://${apiName}.kingpad.finance/project_details?id=1`);
@@ -19,7 +18,6 @@ export const getProjectDetails = async (address: string) => {
 export const getProjectDetailsById = async (id: number) => {
   const res = await axios.get(`https://${apiName}.kingpad.finance/project_details?id=${id}`);
   const data = res.data;
-  console.log("getProjectDetailsById: ", {data});
   return data;
 }
 
@@ -49,7 +47,6 @@ export const getBadgeNames = async (projectId: number) => {
 export const getCreatePresaleData = async () => {
   const response = await axios.get(`https://${apiName}.kingpad.finance/create_presale_data?id=1`);
   const res = response.data;
-  console.log({ res })
   return res;
 }
 
@@ -83,7 +80,6 @@ export const getAdCardId = async () => {
     const data = response.data;
     adCardId = data.sponsoredPresale;
   })
-  console.log({ adCardId })
   return adCardId;
 }
 

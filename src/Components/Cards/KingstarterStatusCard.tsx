@@ -69,7 +69,6 @@ const CountDown = (props: { timestamp: number }) => {
   const [timeLeft, setTimeLeft] = useState(getTimeLeft(timestamp));
 
   function getTimeLeft(timestamp: number) {
-    // console.log('getTimeLeft', Math.floor((timestamp - Date.now()) / 1000));
     if (timestamp < Date.now()) {
       timestamp = Date.now();
     }
@@ -78,8 +77,6 @@ const CountDown = (props: { timestamp: number }) => {
     const hours = Math.floor((totalSeconds % 86400) / 3600);
     const minutes = Math.floor((totalSeconds % 3600) / 60);
     const seconds = Math.floor(totalSeconds % 60);
-    // console.log(timestamp, 'PORCODIOOOOOOOOOOOOOOOOO');
-    // console.log(days, hours, minutes, seconds, 'PORCODIOOOOOOOOOO2322OOOOOOO');
     return { days, hours, minutes, seconds };
   }
 

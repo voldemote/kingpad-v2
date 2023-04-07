@@ -18,7 +18,6 @@ interface CardProps {
 
 export const KingStarterContributeCard = (props: CardProps) => {
   const { status, minBuy, maxBuy, currency, tokenAddress } = props;
-  console.log('KingStarterContributeCard-Status: ', status);
   const [buyVal, setBuyVal] = useState(1);
   const [contributeValue, setContributeValue] = useState(0);
   const { address } = useAccount();

@@ -30,7 +30,7 @@ import { useWeb3Store } from 'src/Context/Web3Context';
 import { coinDataProps } from 'src/Constant/interface';
 import { LaunchConnectButton } from 'src/Components/WalletConnect/LaunchButton';
 import { useAccount } from 'wagmi';
-import { handleContractFunction } from 'src/Utils/handleContract';
+import { handleContractFunction } from 'src/Utils/handleContractFunction';
 
 export const KingSale = () => {
   const defaultState = {

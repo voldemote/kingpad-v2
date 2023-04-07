@@ -8,7 +8,7 @@ import { useAccount, useNetwork } from 'wagmi';
 import { useWeb3Store } from 'src/Context/Web3Context';
 import { ethers } from 'ethers';
 import { ButtonLoader } from '../Button/ButtonLoader';
-import { deposit, withdraw } from 'src/Contracts/kingPad';
+import { deposit, getUserInfo, withdraw } from 'src/Contracts/kingPad';
 
 interface CardProps {
   status: string;
@@ -20,7 +20,6 @@ interface CardProps {
 
 export const KingSaleContributeCard = (props: CardProps) => {
   const { status, minBuy, maxBuy, currency, tokenAddress } = props;
-  console.log('KingSaleContributeCard-Status: ', status);
   const [buyVal, setBuyVal] = useState(1);
   const [contributeValue, setContributeValue] = useState(0);
   const [finalizedAndOk, setFinalizedAndOk] = useState(NaN); // 0 = fail 1 = ok 2 = not finalized
@@ -43,7 +42,6 @@ export const KingSaleContributeCard = (props: CardProps) => {
   };
 
   const handleDeposit = async () => {
-    console.log(ethers.utils.parseEther(buyVal.toString()).toString(), 'OPORCODIOO');
     if (minBuy !== undefined && maxBuy !== undefined && currency !== undefined) {
       if (buyVal < minBuy) {
         toast.error(`Amount should be more than ${minBuy} ${currency}`);
@@ -54,11 +52,8 @@ export const KingSaleContributeCard = (props: CardProps) => {
           setLoad(true);
           try {
             await deposit(ethers.utils.parseEther(buyVal.toString()).toString());
-            // if (address !== undefined) {
-            //   getContributeValue(address);
-            // }
+            await getUserInfos();
           } catch (err: any) {
-            console.log({ err });
             // toast.error(`you need to wait at least 24 hours to withdraw your $KING`, err);
             const revertData = err.reason || err.message;
             // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
@@ -77,11 +72,11 @@ export const KingSaleContributeCard = (props: CardProps) => {
     setLoad(true);
     try {
       await withdraw();
+      await getUserInfos();
       // if (address !== undefined) {
       //   getContributeValue(address);
       // }
     } catch (err: any) {
-      console.log({ err });
       // toast.error(`you need to wait at least 24 hours to withdraw your $KING`, err);
       const revertData = err.reason || err.message;
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
@@ -91,6 +86,19 @@ export const KingSaleContributeCard = (props: CardProps) => {
     }
     setLoad(false);
   };
+
+  const getUserInfos = async () => {
+    if (address !== undefined) {
+      const res = await getUserInfo(address);
+      setTotalContributeValue(res?.amount ?? 0);
+    }
+  };
+
+  useEffect(() => {
+    if (isConnected) {
+      getUserInfos();
+    }
+  }, [isConnected, isInitialized]);
 
   if (status === 'Upcoming') {
     return (

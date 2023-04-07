@@ -45,14 +45,11 @@ export const KingpadAdCard = () => {
   };
 
   const getTimeStamp = (data: coinDataProps) => {
-    console.log('getTimeStamp');
-    console.log(data.kingpass_start, data.kingpass_end);
     const kingpass_start = new Date(data.kingpass_start).getTime();
     let _timeStamp = 0;
     if (status === 'Upcoming') {
       _timeStamp = kingpass_start;
     }
-    console.log(_timeStamp);
     setTimestamp(_timeStamp);
   };
 

@@ -67,7 +67,6 @@ export const CreatePresale = () => {
   const [dateTime2, setDateTime2] = useState<Dayjs | null>(null);
 
   const handleLaunch = () => {
-    console.log('state: ', state);
     if (isEmpty(state.name)) toast.error('Token name must exist');
     else if (isEmpty(state.symbol)) toast.error('Token Symbol must exist');
     else if (isZero(state.decimal)) toast.error('Decimal must exist');

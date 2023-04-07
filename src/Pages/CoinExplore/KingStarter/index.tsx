@@ -17,12 +17,10 @@ export const KingStarterExplore = () => {
 
   const getCoinData = async (id: number) => {
     const data = await getProjectDetailsById(id);
-    console.log('getCoinData', data);
     setCoinData(data);
   };
 
   useEffect(() => {
-    console.log({ id });
     getCoinData(parseInt(id ?? '0'));
   }, []);
   return coinData !== undefined ? (

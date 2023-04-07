@@ -25,7 +25,6 @@ export const Home = () => {
 
   const getKingData = async () => {
     const data = await coinCardData();
-    console.log({ data });
     setKingData(data);
   };
 

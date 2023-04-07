@@ -24,10 +24,7 @@ export const Web3Provider = (props: propsType) => {
 
   const chainId = chain?.id;
 
-  console.log({ provider, signer, chainId });
-
   const [isInitialized, setInitialized] = useState(false);
-  console.log({ isInitialized });
   useEffect(() => {
     if (isConnected) {
       (async () => {
