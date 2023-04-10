@@ -99,7 +99,7 @@ export const KingStarterContributeCard = (props: CardProps) => {
 
   return (
     <CardBox about="Contribute-Card">
-      <CardLabel>Contriubte now</CardLabel>
+      <CardLabel>Contribute now</CardLabel>
       <CardButtonGroup>
         <InputBox onClick={handleInputAreaClick}>
           <Input

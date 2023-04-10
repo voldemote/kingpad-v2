@@ -66,7 +66,7 @@ export const KingstarterStatusCard = (props: {
         <CardLabel>
           {status === 'Ongoing' && 'Ends In'}
           {status === 'Upcoming' && 'Starts in'}
-          {status === 'Ended' && 'Kingstarted ended'}
+          {status === 'Ended' && 'Kingstarter ended'}
         </CardLabel>
         {status === 'Ended' ? (
           <Kingsale onClick={() => window.open(`/kingsale-explore?id=${1}`)}>Visit Kingsale</Kingsale>
