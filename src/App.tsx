@@ -18,6 +18,7 @@ import { KingSale } from './Pages/LaunchPad/KingSale';
 import { AuditPage } from './Pages/Security/Audit';
 import { KYCPage } from './Pages/Security/KYC';
 import { LockLP } from './Pages/Locker/LockLP';
+import HomeNew from './Pages/HomeNew';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
                 <Routes>
                   <Route path={PUBLIC_ROUTES.default} element={<Home />} />
                   <Route path={PUBLIC_ROUTES.home} element={<Home />} />
+                  <Route path={PUBLIC_ROUTES.homeNew} element={<HomeNew />} />
                   <Route path={PUBLIC_ROUTES.kingstarterExplore} element={<KingStarterExplore />} />
                   <Route path={PUBLIC_ROUTES.kingSaleExplore} element={<KingSaleExplore />} />
                   <Route path={PUBLIC_ROUTES.create} element={<CreatePresale />} />

@@ -1,5 +1,6 @@
 export const PUBLIC_ROUTES = {
   default: '/',
+  homeNew: '/home-new', // @iou
   home: '/home/:kingstarter',
   create: '/create',
   kingstarterExplore: '/kingstarter-explore',
