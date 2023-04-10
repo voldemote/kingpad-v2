@@ -6,13 +6,13 @@ export const Footer = () => {
   return (
     <FooterContainer>
       <LogoSection href="https://kingworld.finance" target="_blank" rel="noopener noreferrer">
-        <SmallText>POWERD BY</SmallText>
+        <SmallText>POWERED BY</SmallText>
         <KingLogo src={FooterLogoSvg} alt="footer-logo" />
       </LogoSection>
       <FooterLinks>
-        <FooterLink>Cookie prefereneces</FooterLink>
+        <FooterLink>Cookie preferences</FooterLink>
         <VerticalDivider>|</VerticalDivider>
-        <FooterLink>Privacy police</FooterLink>
+        <FooterLink>Privacy policy</FooterLink>
         <VerticalDivider>|</VerticalDivider>
         <FooterLink>Term of use</FooterLink>
       </FooterLinks>
