@@ -5,6 +5,8 @@ import { Footer } from './Footer';
 import { KingPadSideBar } from './Sidebar';
 import { styled } from '@mui/system';
 import { Box } from '@mui/material';
+import { Route, Routes } from 'react-router-dom';
+
 interface LayoutProps {
   children: React.ReactNode;
 }
@@ -13,22 +15,33 @@ export const Layout = ({ children }: LayoutProps) => {
   return (
     <>
       <Header />
-      <Wrapper>
-        <KingPadSideBar />
-        <ContentWrapper>
-          <ContentContainer>{children}</ContentContainer>
-        </ContentWrapper>
-        <ToastContainer
-          position="top-right"
-          autoClose={3000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          theme="dark"
-          style={{ zIndex: 1000, marginTop: '80px' }}
+
+      <Routes>
+        <Route path="/home-new" element={<></>} />
+        <Route
+          path="*"
+          element={
+            <>
+              <Wrapper>
+                <KingPadSideBar />
+                <ContentWrapper>
+                  <ContentContainer>{children}</ContentContainer>
+                </ContentWrapper>
+              </Wrapper>
+              <Footer />
+            </>
+          }
         />
-      </Wrapper>
-      <Footer />
+      </Routes>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        theme="dark"
+        style={{ zIndex: 1000, marginTop: '80px' }}
+      />
     </>
   );
 };

@@ -37,6 +37,20 @@ declare module '@mui/material/styles' {
   }
   export function createTheme(options?: CustomThemeOptions): CustomTheme;
 }
+
+const breakpointValues = {
+  ls: 360,
+  xs: 390,
+  sm: 540,
+  md: 768,
+  lg: 1024,
+  xl: 1366,
+  mobile: 450,
+  tablet: 640,
+  laptop: 890,
+  desktop: 1200
+};
+
 const FRONT_COLORS_LIGHT = {
   primary: {
     main: '#FAFAFA',
@@ -110,21 +124,10 @@ const FRONT_COLORS_DARK = {
 /**
  * Material UI theme config for "Light Mode"
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const LIGHT_THEME: any = {
+
+const LIGHT_THEME: ThemeOptions = {
   breakpoints: {
-    values: {
-      ls: 360,
-      xs: 390,
-      sm: 540,
-      md: 768,
-      lg: 1024,
-      xl: 1366,
-      mobile: 450,
-      tablet: 640,
-      laptop: 890,
-      desktop: 1200
-    }
+    values: breakpointValues
   },
   palette: {
     mode: 'light',
@@ -139,21 +142,10 @@ const LIGHT_THEME: any = {
 /**
  * Material UI theme config for "Dark Mode"
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const DARK_THEME: any = {
+
+const DARK_THEME: ThemeOptions = {
   breakpoints: {
-    values: {
-      ls: 360,
-      xs: 390,
-      sm: 540,
-      md: 768,
-      lg: 1024,
-      xl: 1366,
-      mobile: 450,
-      tablet: 640,
-      laptop: 890,
-      desktop: 1200
-    }
+    values: breakpointValues
   },
   palette: {
     mode: 'dark',
@@ -164,6 +156,20 @@ const DARK_THEME: any = {
     ...FRONT_COLORS_DARK
   }
 };
+
+// const NEW_DARK_THEME: ThemeOptions = {
+//   breakpoints: {
+//     values: breakpointValues
+//   },
+//   palette: {
+//     mode: 'dark',
+//     background: {
+//       paper: '#37086E', // Gray 800 - Background of "Paper" based component
+//       default: '#37086E'
+//     },
+//     ...FRONT_COLORS_DARK
+//   }
+// };
 
 /**
  * Material UI Provider with Light and Dark themes depending on global "state.darkMode"
