@@ -11,7 +11,7 @@ export const KingpassholderCard = (props: { status: string; isKing: boolean }) =
         {!isKing && status === 'Ongoing' && 'Sorry you need a Kingpass'}
         {isKing && status === 'Ongoing' && 'Congratulations!'}
         {status === 'Upcoming' && 'This sale will start soon'}
-        {status === 'Ended' && 'This sale is ended'}
+        {status === 'Ended' && 'This sale has ended'}
       </PrimaryLabel>
       <SecondaryLabel>
         {!isKing && status === 'Ongoing' && 'To be eligible to join this sale you have to be a Kingpass holder'}

@@ -9,9 +9,11 @@ import { KingsaleStatusCard } from 'src/Components/Cards/KingsaleStatusCard';
 import { KingSaleContributeCard } from 'src/Components/Cards/KingsaleContributeCard';
 import { getMaxBuy, getMinBuy, getUserPassActive } from 'src/Contracts/kingPad';
 import { UTCTimePrinter, currentTimeStamp } from 'src/Utils/utcTimePrinter';
+import { CradleOfSinsProjectName } from 'src/Components/Cards/KingstarterStatusCard';
 
 export const CoinDetailCards = (props: { data: coinDataProps }) => {
   const { data } = props;
+
   const [status, setStatus] = useState(''); // 1: ongoing 2: upcoming 3: ended
 
   const { address } = useAccount();
@@ -67,8 +69,6 @@ export const CoinDetailCards = (props: { data: coinDataProps }) => {
     const _myStart = new Date(data.presale_start).getTime();
     const _myEnd = new Date(data.presale_end).getTime();
 
-    console.log({ presale_start, presale_end, _myStart, _myEnd });
-
     let _timeStamp = 0;
     if (status === 'Upcoming') {
       _timeStamp = presale_start;
@@ -93,8 +93,14 @@ export const CoinDetailCards = (props: { data: coinDataProps }) => {
 
   return (
     <CoinDetailCardsBox>
-      <KingsaleStatusCard status={status} currency={currency} timeStamp={timestamp} />
+      <KingsaleStatusCard
+        isCOS={data.project_name === CradleOfSinsProjectName}
+        status={status}
+        currency={currency}
+        timeStamp={timestamp}
+      />
       <SoftHardCard
+        isCOS={data.project_name === CradleOfSinsProjectName}
         minValue={minBuy}
         maxValue={maxBuy}
         softcap={data.soft_cap}

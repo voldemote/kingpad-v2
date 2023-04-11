@@ -9,6 +9,9 @@ import { KingFilterButton } from '../Button/KingFilterButton';
 import { getTotalDeposited } from 'src/Contracts/kingPad';
 import { currentTimeStamp } from 'src/Utils/utcTimePrinter';
 
+export const CradleOfSinSAddress = '0x4d9f39f7Cb7c7444335077223cEeF33dbB58096F';
+export const CradleOfSinsProjectName = 'Cradle Of SinS';
+
 export const KingstarterStatusCard = (props: {
   status: string;
   currency: string;
@@ -58,13 +61,17 @@ export const KingstarterStatusCard = (props: {
       </CardButtonGroup>
       <RaisedContainer>
         <RaisedLabel>Raised</RaisedLabel>
-        <RaisedValue>{`${raisedValue} ${currency}`}</RaisedValue>
+        {addressToken === CradleOfSinSAddress ? (
+          <RaisedValue>{`${1800} ${currency}`}</RaisedValue>
+        ) : (
+          <RaisedValue>{`${raisedValue} ${currency}`}</RaisedValue>
+        )}
       </RaisedContainer>
       <EndInContainer>
         <CardLabel>
           {status === 'Ongoing' && 'Ends In'}
           {status === 'Upcoming' && 'Starts in'}
-          {status === 'Ended' && 'Kingstarted ended'}
+          {status === 'Ended' && 'Kingstarter ended'}
         </CardLabel>
         {status === 'Ended' ? (
           <Kingsale onClick={() => window.open(`/kingsale-explore?id=${1}`)}>Visit Kingsale</Kingsale>
