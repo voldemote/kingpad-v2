@@ -15,6 +15,7 @@ import { useWeb3Store } from 'src/Context/Web3Context';
 import { ethers } from 'ethers';
 import { getTotalDeposited } from 'src/Contracts/kingPad';
 import { currentTimeStamp } from 'src/Utils/utcTimePrinter';
+import { CradleOfSinsProjectName } from './KingstarterStatusCard';
 
 // status 1: upcoming, 2: ongong, 3: ended
 
@@ -97,13 +98,19 @@ export const CoinCard = (props: CoinCardProps) => {
       <TokenProgress>
         <TokenProgressGraph>
           {isKingStarter ? (
-            coinName === 'Cradle Of SinS' ? (
+            coinName === CradleOfSinsProjectName ? (
               <RaisedCircle raised={1800} />
             ) : (
               <RaisedCircle raised={Math.round(parseFloat(raisedValue.toString()))} />
             )
           ) : (
-            <CircularProgressBar percentage={parseFloat(((totalContribution / hardCap) * 100).toFixed(1))} />
+            <CircularProgressBar
+              percentage={
+                coinName === CradleOfSinsProjectName
+                  ? 100
+                  : parseFloat(((totalContribution / hardCap) * 100).toFixed(1))
+              }
+            />
           )}
         </TokenProgressGraph>
         {!isKingStarter && (
