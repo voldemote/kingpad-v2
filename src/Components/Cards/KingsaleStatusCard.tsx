@@ -13,8 +13,8 @@ import { ethers } from 'ethers';
 import { finalize, getTotalDeposited } from 'src/Contracts/kingPad';
 import { currentTimeStamp } from 'src/Utils/utcTimePrinter';
 
-export const KingsaleStatusCard = (props: { status: string; currency: string; timeStamp: number }) => {
-  const { status, currency, timeStamp } = props;
+export const KingsaleStatusCard = (props: { isCOS: boolean; status: string; currency: string; timeStamp: number }) => {
+  const { status, currency, timeStamp, isCOS } = props;
   const { address } = useAccount();
   const { isConnected, isInitialized } = useWeb3Store();
   const [raisedValue, setRaisedValue] = useState('0');
@@ -65,7 +65,11 @@ export const KingsaleStatusCard = (props: { status: string; currency: string; ti
       </CardButtonGroup>
       <RaisedContainer>
         <RaisedLabel>Raised</RaisedLabel>
-        <RaisedValue>{status === 'Ongoing' ? `${raisedValue} ${currency}` : '-'}</RaisedValue>
+        {isCOS ? (
+          <RaisedValue>{`1800 ${currency}`}</RaisedValue>
+        ) : (
+          <RaisedValue>{status === 'Ongoing' ? `${raisedValue} ${currency}` : '-'}</RaisedValue>
+        )}
       </RaisedContainer>
       <EndInContainer>
         <CardLabel>

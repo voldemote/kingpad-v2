@@ -8,13 +8,14 @@ import { ethers } from 'ethers';
 import { getTotalDeposited } from 'src/Contracts/kingPad';
 
 export const SoftHardCard = (props: {
+  isCOS: boolean;
   minValue: number;
   maxValue: number;
   softcap: number;
   hardcap: number;
   currency: string;
 }) => {
-  const { minValue, maxValue, softcap, hardcap, currency } = props;
+  const { isCOS, minValue, maxValue, softcap, hardcap, currency } = props;
   const [totalContribution, setTotalContribution] = useState(0);
 
   const { isConnected, isInitialized } = useWeb3Store();
@@ -46,7 +47,7 @@ export const SoftHardCard = (props: {
           {minValue} {currency} / {maxValue} {currency}
         </SoftHardCardValue>
       </SoftHardText>
-      <RaisedProgressBar percentage={parseFloat(((totalContribution / hardcap) * 100).toFixed(2))} />
+      <RaisedProgressBar percentage={isCOS ? 100 : parseFloat(((totalContribution / hardcap) * 100).toFixed(2))} />
     </SoftHardCardContainer>
   );
 };
