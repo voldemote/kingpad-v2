@@ -97,7 +97,11 @@ export const CoinCard = (props: CoinCardProps) => {
       <TokenProgress>
         <TokenProgressGraph>
           {isKingStarter ? (
-            <RaisedCircle raised={parseFloat(raisedValue.toString())} />
+            coinName === 'Cradle Of SinS' ? (
+              <RaisedCircle raised={1800} />
+            ) : (
+              <RaisedCircle raised={Math.round(parseFloat(raisedValue.toString()))} />
+            )
           ) : (
             <CircularProgressBar percentage={parseFloat(((totalContribution / hardCap) * 100).toFixed(1))} />
           )}
