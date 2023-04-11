@@ -85,9 +85,9 @@ export const CoinDetailCards = (props: { data: coinDataProps }) => {
   }, [status]);
 
   useEffect(() => {
+    setBuyLimitValue();
     if (isConnected) {
       getUserActive();
-      setBuyLimitValue();
     }
   }, [isInitialized, isConnected]);
 

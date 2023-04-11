@@ -27,9 +27,7 @@ export const SoftHardCard = (props: {
   };
 
   useEffect(() => {
-    if (isConnected) {
-      getTotalDepositValue();
-    }
+    getTotalDepositValue();
   }, [isConnected, isInitialized]);
 
   return (

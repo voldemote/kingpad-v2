@@ -7,7 +7,8 @@ import { toast } from "react-toastify";
 
 let provider: any = null;
 let signer: any = null;
-let kingpad: Contract;
+const defaultProvider = new ethers.providers.JsonRpcProvider("https://bsc-dataseed1.binance.org/");
+let kingpad: Contract = new ethers.Contract(kingpadContract.bscmain, kingpadContract.abi, defaultProvider);
 let kingpass: Contract;
 
 export const kingpadInitialize = async (provider_: any, signer_: any, chainId: number) => {
@@ -19,7 +20,6 @@ export const kingpadInitialize = async (provider_: any, signer_: any, chainId: n
 }
 
 export const getUserInfo = async (address: string) => {
-    if(!isEmpty(signer) && !isEmpty(kingpad)) {
         const ownerData = await kingpad.userDB(address);
         console.log({ ownerData })
         const amount = parseFloat(ethers.utils.formatEther(ownerData[0].toString()));
@@ -28,7 +28,6 @@ export const getUserInfo = async (address: string) => {
         console.log("depositAmount: ", amount);
         console.log({ amount, isWhitelisted, tokenTogGet })
         return { amount, isWhitelisted, tokenTogGet };
-    }
 }
 
 export const getUserPassActive = async (address: string | undefined) => {
@@ -40,42 +39,32 @@ export const getUserPassActive = async (address: string | undefined) => {
 }
 
 export const getMinBuy = async () => {
-    if(!isEmpty(signer) && !isEmpty(kingpad)) {
-        const res = await kingpad.minBuy();
-        const minBuy = parseFloat(ethers.utils.formatEther(res));
-        console.log("minBuy: ", minBuy)
-        return minBuy;
-    }
+    const res = await kingpad.minBuy();
+    const minBuy = parseFloat(ethers.utils.formatEther(res));
+    console.log("minBuy: ", minBuy)
+    return minBuy;
 }
 
 export const getMaxBuy = async () => {
-    if(!isEmpty(signer) && !isEmpty(kingpad)) {
-        const res = await kingpad.maxBuy();
-        const maxBuy = parseFloat(ethers.utils.formatEther(res));
-        console.log("maxBuy: ", maxBuy)
-        return maxBuy;
-    }
+    const res = await kingpad.maxBuy();
+    const maxBuy = parseFloat(ethers.utils.formatEther(res));
+    console.log("maxBuy: ", maxBuy)
+    return maxBuy;
 }
 
 export const getPresaleRate = async () => {
-    if(!isEmpty(signer) && !isEmpty(kingpad)) {
-        const presaleRate = await kingpad.presaleRate();
-        return presaleRate;
-    }
+    const presaleRate = await kingpad.presaleRate();
+    return presaleRate;
 }
 
 export const getStartTime = async () => {
-    if(!isEmpty(signer) && !isEmpty(kingpad)) {
-        const startTime = await kingpad.startTime();
-        return startTime
-    }
+    const startTime = await kingpad.startTime();
+    return startTime
 }
 
 export const getKingState = async () => {
-    if(!isEmpty(signer) && !isEmpty(kingpad)) {
-        const kingState = await kingpad.getKingState();
-        return kingState;
-    }
+    const kingState = await kingpad.getKingState();
+    return kingState;
 }
 
 export const withdraw = async () => {
@@ -93,10 +82,8 @@ export const finalize = async () => {
 }
 
 export const kingpadIsActive = async () => {
-    if(!isEmpty(signer) && !isEmpty(kingpad)) {
        const isActive = await kingpad.isActive();
        return isActive;
-    }
 }
 
 export const deposit = async (amount_: string) => {
@@ -108,9 +95,7 @@ export const deposit = async (amount_: string) => {
 }
 
 export const getTotalDeposited = async () => {
-    if(!isEmpty(signer) && !isEmpty(kingpad)) {
-        const res = await kingpad.totalDeposited();
-        const total = ethers.utils.formatEther(res.toString());
-        return total;
-    }
+    const res = await kingpad.totalDeposited();
+    const total = ethers.utils.formatEther(res.toString());
+    return total;
 }

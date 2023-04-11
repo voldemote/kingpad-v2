@@ -33,9 +33,7 @@ export const KingsaleStatusCard = (props: { status: string; currency: string; ti
   };
 
   useEffect(() => {
-    if (isConnected) {
-      getTotalDepositValue();
-    }
+    getTotalDepositValue();
   }, [isConnected, isInitialized]);
 
   return (
@@ -65,7 +63,7 @@ export const KingsaleStatusCard = (props: { status: string; currency: string; ti
       </CardButtonGroup>
       <RaisedContainer>
         <RaisedLabel>Raised</RaisedLabel>
-        <RaisedValue>{status === 'Ongoing' ? `${raisedValue} ${currency}` : '-'}</RaisedValue>
+        <RaisedValue>{status === 'Ongoing' || status === 'Ended' ? `${raisedValue} ${currency}` : '-'}</RaisedValue>
       </RaisedContainer>
       <EndInContainer>
         <CardLabel>

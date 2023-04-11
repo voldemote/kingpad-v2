@@ -38,11 +38,11 @@ export const KingSaleExplore = () => {
   };
 
   useEffect(() => {
+    getKingStatus();
     if (isConnected && address !== undefined) {
       getCoinData(address);
 
       isKingPadActive();
-      getKingStatus();
     } else {
       getCoinData('');
     }

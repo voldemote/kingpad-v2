@@ -28,9 +28,7 @@ export const KingstarterStatusCard = (props: {
   };
 
   useEffect(() => {
-    if (isConnected) {
-      getTotalDepositValue();
-    }
+    getTotalDepositValue();
   }, [isConnected, isInitialized]);
 
   return (

@@ -50,9 +50,7 @@ export const CoinCard = (props: CoinCardProps) => {
   };
 
   useEffect(() => {
-    if (isConnected) {
       getTotalDepositValue();
-    }
   }, [isConnected, isInitialized]);
 
   return (
