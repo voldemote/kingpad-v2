@@ -12,7 +12,8 @@ import CopyToClipboard from 'src/Components/CopyToClipBoard';
 export const CoinInfos = (props: { data: coinDataProps; projectId: number }) => {
   const { data, projectId } = props;
   const [presaleAddress, setPresaleAddress] = useState();
-  const { isConnected, isInitialized } = useWeb3Store();
+  const isInitialized = false;
+  const isConnected = false;
 
   return (
     <CoinInfosContainer>

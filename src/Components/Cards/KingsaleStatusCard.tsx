@@ -16,7 +16,9 @@ import { currentTimeStamp } from 'src/Utils/utcTimePrinter';
 export const KingsaleStatusCard = (props: { isCOS: boolean; status: string; currency: string; timeStamp: number }) => {
   const { status, currency, timeStamp, isCOS } = props;
   const { address } = useAccount();
-  const { isConnected, isInitialized } = useWeb3Store();
+  const isInitialized = false;
+  const isConnected = false;
+
   const [raisedValue, setRaisedValue] = useState('0');
   const [isAdmin, setAdmin] = useState(false);
   const [isLoad, setLoad] = useState(false);

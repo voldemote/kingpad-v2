@@ -20,7 +20,8 @@ export const KingSaleExplore = () => {
   const id = params.get('id');
   const { address } = useAccount();
 
-  const { isConnected, isInitialized } = useWeb3Store();
+  const isInitialized = false;
+  const isConnected = false;
 
   const getCoinData = async (addy: string) => {
     const data = await getProjectDetailsById(parseInt(id ?? '0'));

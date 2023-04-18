@@ -19,7 +19,8 @@ export const Header = () => {
   const [isOpen, setOpen] = React.useState(false);
   const [status, setStatus] = React.useState<number | undefined>(2); // 0: inActive, 1: active, 2: no kingpass
   const { address } = useAccount();
-  const { isConnected, isInitialized } = useWeb3Store();
+  const isInitialized = false;
+  const isConnected = false;
 
   const getUserHasKingpass = async () => {
     const hasKing = await getUserPassActive(address);

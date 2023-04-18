@@ -17,7 +17,9 @@ export const CoinDetailCards = (props: { data: coinDataProps }) => {
   const [status, setStatus] = useState(''); // 1: ongoing 2: upcoming 3: ended
 
   const { address } = useAccount();
-  const { isConnected, isInitialized } = useWeb3Store();
+  const isInitialized = false;
+  const isConnected = false;
+
   const [hasKing, setHasKing] = useState(false);
   const [currency, setCurrency] = useState('BNB');
   const [timestamp, setTimeStamp] = useState(0);

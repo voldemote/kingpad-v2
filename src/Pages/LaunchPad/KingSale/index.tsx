@@ -26,7 +26,7 @@ import { TokenDescription } from './TokenDescription';
 import { BannerCard } from './BannerCard';
 import { getProjectDetails } from 'src/Contracts';
 // import { createPresale, getTokenInfo } from 'src/Contracts/kingStarter';
-import { useWeb3Store } from 'src/Context/Web3Context';
+// import { useWeb3Store } from 'src/Context/Web3Context';
 import { coinDataProps } from 'src/Constant/interface';
 import { LaunchConnectButton } from 'src/Components/WalletConnect/LaunchButton';
 import { useAccount } from 'wagmi';
@@ -76,7 +76,8 @@ export const KingSale = () => {
 
   const [isLoad, setLoad] = useState(false);
 
-  const { isInitialized, isConnected } = useWeb3Store();
+  const isInitialized = false;
+  const isConnected = false;
 
   const handleState = (prop: string, value: string | number | boolean) => {
     setState({ ...state, [prop]: value });

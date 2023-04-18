@@ -22,7 +22,9 @@ export const KingStarterContributeCard = (props: CardProps) => {
   const [buyVal, setBuyVal] = useState(1);
   const [contributeValue, setContributeValue] = useState(0);
   const { address } = useAccount();
-  const { isConnected, isInitialized } = useWeb3Store();
+  const isInitialized = false;
+  const isConnected = false;
+
   const { chain } = useNetwork();
   const [isLoad, setLoad] = useState(false);
   const buyRef = useRef<HTMLInputElement>(null);

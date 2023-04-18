@@ -34,7 +34,9 @@ export const SidebarItems = (props: SidebarItemProps) => {
   const [isKingSale, setKingSale] = useState(false);
   const navigate = useNavigate();
   const { address } = useAccount();
-  const { isConnected, isInitialized } = useWeb3Store();
+  const isInitialized = false;
+  const isConnected = false;
+
   const media = window.matchMedia(`(max-width: 1024px)`);
   const handleLinkClicked = (val: number) => {
     if (setOpen != null) setOpen(false);

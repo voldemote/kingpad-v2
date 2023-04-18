@@ -18,7 +18,8 @@ export const SoftHardCard = (props: {
   const { isCOS, minValue, maxValue, softcap, hardcap, currency } = props;
   const [totalContribution, setTotalContribution] = useState(0);
 
-  const { isConnected, isInitialized } = useWeb3Store();
+  const isInitialized = false;
+  const isConnected = false;
 
   const getTotalDepositValue = async () => {
     const total = await getTotalDeposited();

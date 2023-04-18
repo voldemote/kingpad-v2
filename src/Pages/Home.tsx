@@ -7,6 +7,7 @@ import { StatusFilterButton } from 'src/Components/Button/StatusFilterButton';
 import { CoinCard } from 'src/Components/Cards/CoinCard';
 import { KingpadCard, KingpadCardContainer } from 'src/Components/Cards/KingpadCard';
 import { SafePlaceCard } from 'src/Components/Cards/SafePlaceCard';
+import { Connect } from 'src/Components/Connect';
 import { KingpadAdCard } from 'src/Components/KingpadAdCard';
 import { KingLogoIcon, HelmetIcon } from 'src/Config/Images';
 import { coinCardData } from 'src/Constant/arrayData';
@@ -53,6 +54,7 @@ export const Home = () => {
 
   return (
     <>
+      <Connect />
       <SafePlaceCard />
       <KingpadCards>
         <KingpadCard

@@ -25,7 +25,9 @@ export const KingSaleContributeCard = (props: CardProps) => {
   const [finalizedAndOk, setFinalizedAndOk] = useState(NaN); // 0 = fail 1 = ok 2 = not finalized
   const [tokenValue, setTokenValue] = useState(0);
   const { address } = useAccount();
-  const { isConnected, isInitialized } = useWeb3Store();
+  const isInitialized = false;
+  const isConnected = false;
+
   const [isLoad, setLoad] = useState(false);
   const { chain } = useNetwork();
 

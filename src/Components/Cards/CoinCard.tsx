@@ -39,7 +39,9 @@ export const CoinCard = (props: CoinCardProps) => {
   const navigate = useNavigate();
 
   const [totalContribution, setTotalContribution] = useState(0);
-  const { isConnected, isInitialized } = useWeb3Store();
+  const isInitialized = false;
+  const isConnected = false;
+
   const [raisedValue, setRaisedValue] = useState('0');
 
   const getTotalDepositValue = async () => {
@@ -51,7 +53,7 @@ export const CoinCard = (props: CoinCardProps) => {
   };
 
   useEffect(() => {
-      getTotalDepositValue();
+    getTotalDepositValue();
   }, [isConnected, isInitialized]);
 
   return (
