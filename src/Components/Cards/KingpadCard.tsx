@@ -13,24 +13,26 @@ interface KingpadCardProps {
 export const KingpadCard = (props: KingpadCardProps) => {
   return (
     <KingpadCardContainer>
-      <CardDetails>
-        <CardTitle>{props.title}</CardTitle>
-        <CardContent>{props.content}</CardContent>
-        <MobileIcon>
+      <div>
+        <CardDetails>
+          <CardTitle>{props.title}</CardTitle>
+          <CardContent>{props.content}</CardContent>
+          <MobileIcon>
+            <Img src={props.icon} alt="kingpad-icon" />
+          </MobileIcon>
+          <ALink href={props.link} target="_blank" rel="noopener noreferrer">
+            <CustomKingButton>{props.btnTitle}</CustomKingButton>
+          </ALink>
+        </CardDetails>
+        <CardIcon>
           <Img src={props.icon} alt="kingpad-icon" />
-        </MobileIcon>
-        <ALink href={props.link} target="_blank" rel="noopener noreferrer">
-          <CustomKingButton>{props.btnTitle}</CustomKingButton>
-        </ALink>
-      </CardDetails>
-      <CardIcon>
-        <Img src={props.icon} alt="kingpad-icon" />
-      </CardIcon>
+        </CardIcon>
+      </div>
     </KingpadCardContainer>
   );
 };
 
-const KingpadCardContainer = styled(Box)(({ theme }) => ({
+export const KingpadCardContainer = styled(Box)(({ theme }) => ({
   padding: '32px 47px',
   display: 'flex',
   backgroundColor: theme.palette.primary.main,
@@ -52,7 +54,7 @@ const CardDetails = styled(Box)(({ theme }) => ({
   flexDirection: 'column',
   gap: '12px',
   alignItems: 'flex-start',
-  height: '100%',
+
   [theme.breakpoints.down('xl')]: {
     alignItems: 'center',
     justifyContent: 'space-between'

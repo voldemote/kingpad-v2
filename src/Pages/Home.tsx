@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom';
 import { KingFilterButton } from 'src/Components/Button/KingFilterButton';
 import { StatusFilterButton } from 'src/Components/Button/StatusFilterButton';
 import { CoinCard } from 'src/Components/Cards/CoinCard';
-import { KingpadCard } from 'src/Components/Cards/KingpadCard';
+import { KingpadCard, KingpadCardContainer } from 'src/Components/Cards/KingpadCard';
 import { SafePlaceCard } from 'src/Components/Cards/SafePlaceCard';
 import { KingpadAdCard } from 'src/Components/KingpadAdCard';
 import { KingLogoIcon, HelmetIcon } from 'src/Config/Images';
@@ -70,6 +70,9 @@ export const Home = () => {
           icon={HelmetIcon}
         />
       </KingpadCards>
+      <UpdatesContainer>
+        <UpdatesLeft></UpdatesLeft>
+      </UpdatesContainer>
       <KingpadAdCard />
       <CoinCardFilter id="filter" ref={filterRef}>
         <KingFilter>
@@ -133,7 +136,8 @@ const KingpadCards = styled(Box)(({ theme }) => ({
   marginTop: '17px',
   [theme.breakpoints.down('mobile')]: {
     gridTemplateColumns: 'auto'
-  }
+  },
+  backgroundColor: 'transparent'
 }));
 
 const CoinCardFilter = styled(Box)(({ theme }) => ({
@@ -222,6 +226,36 @@ const StatusFilter = styled(Box)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   gap: '5.5px',
+  [theme.breakpoints.down(460)]: {
+    display: 'grid',
+    gridTemplateColumns: 'auto auto'
+  }
+}));
+
+const UpdatesContainer = styled(Box)(({ theme }) => ({
+  width: '100%',
+  display: 'grid',
+  gridTemplateColumns: 'auto auto',
+  gap: '14px',
+  marginTop: '17px',
+  [theme.breakpoints.down('mobile')]: {
+    gridTemplateColumns: 'auto'
+  },
+  backgroundColor: 'transparent'
+}));
+
+const UpdatesLeft = styled(Box)(({ theme }) => ({
+  alignItems: 'center',
+  minHeight: 300,
+  [theme.breakpoints.down(460)]: {
+    display: 'grid',
+    gridTemplateColumns: 'auto auto'
+  }
+}));
+
+const UpdatesRight = styled(Box)(({ theme }) => ({
+  alignItems: 'center',
+  minHeight: 300,
   [theme.breakpoints.down(460)]: {
     display: 'grid',
     gridTemplateColumns: 'auto auto'
