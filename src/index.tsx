@@ -17,7 +17,7 @@ import {
   walletConnectWallet,
   coinbaseWallet
 } from '@rainbow-me/rainbowkit/wallets';
-import { configureChains, createClient, WagmiConfig } from 'wagmi';
+import { configureChains, mainnet, createClient, WagmiConfig } from 'wagmi';
 import { bsc, polygonMumbai } from 'wagmi/chains';
 import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
@@ -49,7 +49,7 @@ const forkBnbChain: Chain = {
 };
 
 const { chains, provider } = configureChains(
-  [bsc, polygonMumbai, forkBnbChain],
+  [mainnet, bsc, polygonMumbai, forkBnbChain],
   [alchemyProvider({ apiKey: '6mDnh0_FqrDQzdcOCI_O5NkDs70x4VYp' }), publicProvider()]
 );
 

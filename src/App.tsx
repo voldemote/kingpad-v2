@@ -18,6 +18,7 @@ import { KingSale } from './Pages/LaunchPad/KingSale';
 import { AuditPage } from './Pages/Security/Audit';
 import { KYCPage } from './Pages/Security/KYC';
 import { LockLP } from './Pages/Locker/LockLP';
+import { Profile } from './Components/Profile';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
               <ScrollToTop />
               <Routes>
                 <Route path={PUBLIC_ROUTES.default} element={<Home />} />
+                <Route path={'/test'} element={<Profile />} />
                 <Route path={PUBLIC_ROUTES.home} element={<Home />} />
                 <Route path={PUBLIC_ROUTES.kingstarterExplore} element={<KingStarterExplore />} />
                 <Route path={PUBLIC_ROUTES.kingSaleExplore} element={<KingSaleExplore />} />
