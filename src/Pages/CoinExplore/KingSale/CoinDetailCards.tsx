@@ -66,9 +66,6 @@ export const CoinDetailCards = (props: { data: coinDataProps }) => {
     const presale_start = UTCTimePrinter(data.presale_start);
     const presale_end = UTCTimePrinter(data.presale_end);
 
-    const _myStart = new Date(data.presale_start).getTime();
-    const _myEnd = new Date(data.presale_end).getTime();
-
     let _timeStamp = 0;
     if (status === 'Upcoming') {
       _timeStamp = presale_start;

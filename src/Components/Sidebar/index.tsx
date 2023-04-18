@@ -78,63 +78,10 @@ export const SidebarItems = (props: SidebarItemProps) => {
         <SidebarLinkContainer>
           <NavLink to={`/?kingstarter=true#filter`}>
             <SidebarLink active={page === 1} onClick={() => handleLinkClicked(1)}>
-              Kingstarter
+              Launches
               <StarBorder sx={{ width: '18px', height: '18px', color: '#FFD583' }} />
             </SidebarLink>
           </NavLink>
-          <KingStarterTooltip
-            title={
-              <KingTooltipBox
-                name="kingstarter"
-                icon={<StarBorder sx={{ width: '18px', height: '18px', color: '#FFD583' }} />}
-                content={
-                  <p>
-                    Welcome to your most assured VIP investment experience, welcome to Kingstarter.
-                    <br />
-                    <br /> If you have a Kingpass, you are eligible to this priviledged function where you have a
-                    guaranteed allocation in our listed projects.
-                    <br />
-                    <br /> If you don’t own a Kingpass, make sure to check{' '}
-                    <ALink href="https://kingpass.finance" rel="noopener noreferrer" target="_blank">
-                      kingpass.finance
-                    </ALink>
-                    .
-                  </p>
-                }
-              />
-            }
-          >
-            <InfoBadge onClick={() => handleInfoModal(0)}>Info</InfoBadge>
-          </KingStarterTooltip>
-        </SidebarLinkContainer>
-        <SidebarLinkContainer>
-          <NavLink to={`/?kingstarter=false#filter`}>
-            <SidebarLink active={page === 2} onClick={() => handleLinkClicked(2)}>
-              Kingsale
-              <DiamondOutlined sx={{ width: '15px', height: '15px', color: '#A47FDB' }} />
-            </SidebarLink>
-          </NavLink>
-          <KingSaleTooltip
-            title={
-              <KingTooltipBox
-                name="kingsale"
-                icon={<DiamondOutlined sx={{ width: '18px', height: '18px', color: '#A47FDB' }} />}
-                content={
-                  <p>
-                    Investing early, made simple. Kingsale is a public modality of launch built for anyone who wishes to
-                    participate with the crowd and get a possible allocation of the projects listing in KingPad.
-                    <br />
-                    <br /> It allows users to invest in new projects by purchasing the tokens being offered during the
-                    public launch. <br />
-                    <br /> Kingsale is designed to be accessible to everyone and provides an opportunity for retail
-                    investors to get in on the ground floor of emerging projects.
-                  </p>
-                }
-              />
-            }
-          >
-            <InfoBadge onClick={() => handleInfoModal(1)}>Info</InfoBadge>
-          </KingSaleTooltip>
         </SidebarLinkContainer>
       </SidebarItem>
       <SidebarItem icon={<HealthAndSafetyOutlined />} title="Security">
